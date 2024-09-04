@@ -38,6 +38,12 @@ gcloud compute networks subnets create kubernetes-subnet --project=kubernetes-le
 * enable-flow-logs - Turning on VPC flow logs doesn't affect performance, but some systems generate a large number of logs, which can increase costs in Logging.
 * logging-aggregation - nformation for sampled packets is aggregated over this interval to generate a flow log record. For more information
 
+### Create firewall
+```bash
+ google compute firewall-rules create firewall-rules-gke --project=kubernetes-learning-433210 --network=projects/kubernetes-learning-433210/global/networks/kubernetes-network --description=Allow\ connection\ from\ specific\ IP --direction=INGRESS --priority=1000 --source-ranges=27.60.164.15/32 --action=ALLOW --rules=all
+```
+
+
 ## Commans used to delete the VPC
 
 ### Delete Subnet
