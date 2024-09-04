@@ -23,3 +23,19 @@ resource "google_compute_subnetwork" "custom-subnet" {
     metadata             = var.include_all_metadata
   }
 }
+
+# Creating a firewall rule
+resource "google_compute_firewall" "firewall-rules-gke" {
+    name = var.firewall_rule_gke
+    network = google_compute_network.custom-vpc-network.name
+
+    allow {
+      protocol = var.firewall_protocol
+      ports = var.firewall_ports
+    }
+    priority = 1000
+    direction = var.direction
+    source_ranges = var.firewall_ip_range
+    target_tags = var.firewall_tags
+  
+}
