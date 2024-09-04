@@ -9,3 +9,9 @@ variable "aggregate_interval" {}
 variable "include_all_metadata" {}
 variable "kubernetes_network_description" {}
 variable "kubernetes_subnetwork_description" {}
+variable "firewall_rule_gke" {}
+variable "firewall_protocol" {}
+variable "firewall_ports" {}
+variable "firewall_tags" {}
+variable "firewall_ip_range" {}
+variable "direction" {}
