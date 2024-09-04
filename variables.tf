@@ -1,2 +1,11 @@
 variable "project_id" {}
 variable "project_region" {}
+variable "vpc_name" {}
+variable "route_mode" {}
+variable "subnet_name" {}
+variable "ip_address_range" {}
+variable "stack_type" {}
+variable "aggregate_interval" {}
+variable "include_all_metadata" {}
+variable "kubernetes_network_description" {}
+variable "kubernetes_subnetwork_description" {}

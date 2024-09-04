@@ -38,4 +38,16 @@ gcloud compute networks subnets create kubernetes-subnet --project=kubernetes-le
 * enable-flow-logs - Turning on VPC flow logs doesn't affect performance, but some systems generate a large number of logs, which can increase costs in Logging.
 * logging-aggregation - nformation for sampled packets is aggregated over this interval to generate a flow log record. For more information
 
+## Commans used to delete the VPC
 
+### Delete Subnet
+
+```bash
+gcloud compute networks subnets delete kubernetes-subnet --project=kubernetes-learning-433210 --region=asia-south1
+```
+
+### Delete network
+
+```bash
+gcloud compute networks delete kubernetes-network --project=kubernetes-learning-433210
+```
