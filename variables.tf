@@ -72,3 +72,14 @@ variable "deny_all_traffic" {
     description = "Firewall name"
   
 }
+
+variable "router_name" {
+  default = "custom-router"
+  description = "Router Name"
+}
+
+variable "nat_gateway" {
+    default = "custom-nat-gateway"
+    description = "Nat gateway name"
+  
+}

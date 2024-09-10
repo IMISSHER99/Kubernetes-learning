@@ -1,72 +1,47 @@
-# Infrastructure Setup and Deployment
+# E-Commerce Architecture on Google Cloud Platform (GCP)
 
-This project automates the creation of infrastructure and deployment processes using Terraform, GitHub Actions, and Google Cloud services. The setup includes a custom VPC, a Google Kubernetes Engine (GKE) cluster, application deployment, image storage in Google Cloud Artifact Registry, and logging and monitoring using Google Cloud.
+## Version History
 
-## Prerequisites
+| Version Number | Name            | Date       |
+|----------------|-----------------|------------|
+| 1.0            | Initial Design  | 2024-09-10 |
 
-- [Terraform](https://www.terraform.io/downloads.html) installed
-- [gcloud CLI](https://cloud.google.com/sdk/docs/install) installed and configured
-- [GitHub account](https://github.com) with repository access
-- Access to a Google Cloud Project
+## Overview
 
-## Setup Instructions
+This repository contains the infrastructure setup and configuration for a scalable and secure e-commerce application on Google Cloud Platform (GCP) without using Kubernetes. The architecture leverages managed services such as Cloud Run, App Engine, Cloud SQL, and more to simplify operations and enhance scalability.
 
-1. **Clone the Repository**
+## Architecture Components
 
-    ```bash
-    git clone https://github.com/your-username/your-repo.git
-    cd your-repo
-    ```
+1. **Networking Setup: Custom VPC**
+   - **Custom VPC**: Defines network boundaries and control.
+   - **Subnets**: Separate environments (development, staging, production).
+   - **Firewall Rules**: Controls traffic between services and restricts external access.
+   - **Cloud NAT**: Provides secure internet access without exposing private IPs.
 
-2. **Configure Terraform**
+2. **Compute Layer: Cloud Run and App Engine**
+   - **Backend Microservices**: Deployed on Cloud Run, utilizing Docker images stored in Artifact Registry.
+   - **Frontend Application**: Hosted on App Engine Standard with CI/CD automation via Cloud Build.
 
-    Edit the `terraform/main.tf` file with your VPC, GKE cluster, and Artifact Registry settings.
+3. **Storage and Databases**
+   - **Cloud SQL (Postgres)**: Provides managed relational database services with private IP.
+   - **Cloud Storage**: Stores static assets like product images and user uploads.
+   - **Firestore**: For real-time, scalable NoSQL storage needs.
 
-3. **Initialize Terraform**
+4. **CI/CD Pipeline: Cloud Build and Artifact Registry**
+   - **Cloud Build**: Automates builds, tests, and deployments.
+   - **Artifact Registry**: Stores Docker images for backend services.
 
-    ```bash
-    terraform init
-    ```
+5. **Load Balancing and Traffic Management**
+   - **Cloud Load Balancer**: Routes traffic to Cloud Run services with path-based or header-based routing.
 
-4. **Apply Terraform Configuration**
+6. **Monitoring and Logging**
+   - **Cloud Monitoring**: Visualizes metrics like request latency and error rates.
+   - **Cloud Logging**: Captures detailed application logs and alerts for issues.
 
-    ```bash
-    terraform apply
-    ```
+7. **Security Configurations**
+   - **IAM Roles and Policies**: Implements least privilege access for services.
+   - **Cloud Armor**: Protects against web attacks and DDoS threats.
+   - **Secret Manager**: Stores and manages sensitive information securely.
 
-    Confirm the action by typing `yes`.
-
-5. **Build and Push Docker Images**
-
-    ```bash
-    docker build -t gcr.io/your-project-id/your-image-name:tag .
-    docker push gcr.io/your-project-id/your-image-name:tag
-    ```
-
-6. **Deploy Applications to GKE**
-
-    ```bash
-    kubectl apply -f k8s/
-    ```
-
-7. **Set Up CI/CD with GitHub Actions**
-
-    Configure workflows in the `.github/workflows/` directory for building Docker images, pushing to Artifact Registry, and deploying to GKE.
-
-8. **Logging and Monitoring**
-
-    Enable Google Cloud Logging and Monitoring for your GKE cluster via the Google Cloud Console.
-
-## Troubleshooting
-
-- **Terraform Errors**: Check Terraform logs and configuration.
-- **Deployment Issues**: Review GKE and Kubernetes logs.
-- **CI/CD Failures**: Inspect GitHub Actions logs.
-
-## License
-
-Licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Open issues or submit pull requests for suggestions or improvements.
+8. **Infrastructure as Code with Terraform**
+   - **Terraform Scripts**: Defines and manages infrastructure components including VPC, Cloud Run, Cloud SQL, Cloud Storage, IAM configurations, and more.
