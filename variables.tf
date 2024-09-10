@@ -104,3 +104,28 @@ variable "nat_log_filter" {
   default =  "ALL"
   description = "NATs log filter"
 }
+
+variable "private_ip_address" {
+  default = "private-ip-address"
+  description = "global ip address name"
+}
+
+variable "private_ip_type" {}
+variable "private_ip_purpose" {}
+variable "service" {}
+variable "sql_instance" {
+  default = "postgresql-database-instance"
+  description = "Name of Cloud Sql Instance"
+}
+
+variable "database_version" {}
+variable "machine_type" {}
+variable "availability_type" {}
+variable "edition" {}
+variable "environment" {}
+variable "postgresql-database" {
+  default = "postgresql-database"
+  description = "Database Name"  
+}
+variable "db_username" {}
+variable "db_password" {}
