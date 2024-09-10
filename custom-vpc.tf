@@ -5,16 +5,16 @@ resource "google_compute_network" "custom-vpc-network" {
   auto_create_subnetworks = false
   mtu                     = 1460
   routing_mode            = var.route_mode
-  description = var.kubernetes_network_description
+  description = "Custom VPC for an ecommerce architecture"
 }
 
 # Creating a custom subnet
-resource "google_compute_subnetwork" "custom-subnet" {
-  ip_cidr_range            = var.ip_address_range
+resource "google_compute_subnetwork" "front-end-subnet" {
+  ip_cidr_range            = var.ip_address_range_frontend
   region                   = var.project_region
-  name                     = var.subnet_name
+  name                     = var.subnet_name_frontend
   network                  = google_compute_network.custom-vpc-network.name
-  description = var.kubernetes_subnetwork_description
+  description = "subnet for frontend"
   private_ip_google_access = true
   stack_type               = var.stack_type
   log_config {
@@ -24,18 +24,32 @@ resource "google_compute_subnetwork" "custom-subnet" {
   }
 }
 
-# Creating a firewall rule
-resource "google_compute_firewall" "firewall-rules-gke" {
-    name = var.firewall_rule_gke
-    network = google_compute_network.custom-vpc-network.name
+resource "google_compute_subnetwork" "back-end-subnet" {
+  ip_cidr_range            = var.ip_address_range_backend
+  region                   = var.project_region
+  name                     = var.subnet_name_backend
+  network                  = google_compute_network.custom-vpc-network.name
+  description = "subnet for backend"
+  private_ip_google_access = true
+  stack_type               = var.stack_type
+  log_config {
+    aggregation_interval = var.aggregate_interval
+    flow_sampling        = 0.5
+    metadata             = var.include_all_metadata
+  }
+}
 
-    allow {
-      protocol = var.firewall_protocol
-      ports = var.firewall_ports
-    }
-    priority = 1000
-    direction = var.direction
-    source_ranges = var.firewall_ip_range
-    target_tags = var.firewall_tags
-  
+resource "google_compute_subnetwork" "database-subnet" {
+  ip_cidr_range            = var.ip_address_range_database
+  region                   = var.project_region
+  name                     = var.subnet_name_database
+  network                  = google_compute_network.custom-vpc-network.name
+  description = "subnet for database"
+  private_ip_google_access = true
+  stack_type               = var.stack_type
+  log_config {
+    aggregation_interval = var.aggregate_interval
+    flow_sampling        = 0.5
+    metadata             = var.include_all_metadata
+  }
 }
