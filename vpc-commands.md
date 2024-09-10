@@ -4,11 +4,15 @@
 This document outlines the steps used to create a custom mode vpc network in Google Cloud Platform using 'gcloud' command line tool.
 
 ## Commands Used
+
 ### VPC Network
+
 ```bash
 gcloud compute networks create kubernetes-network --project=kubernetes-learning-433210 --description=VPC\ created\ for\ GKE --subnet-mode=custom --mtu=1460 --bgp-routing-mode=regional
 ```
+
 #### Arguments
+
 * project - This refers to the project in which a VPC should be created
 * description - (optional) description of the VPC
 * subnet-mode - There are two options available
@@ -26,6 +30,7 @@ gcloud compute networks subnets create kubernetes-subnet --project=kubernetes-le
 ```
 
 #### Arguments
+
 * project - This refers to the project in which a VPC should be created
 * description - (optional) description of the VPC
 * range - specifies the IP range
@@ -39,6 +44,7 @@ gcloud compute networks subnets create kubernetes-subnet --project=kubernetes-le
 * logging-aggregation - nformation for sampled packets is aggregated over this interval to generate a flow log record. For more information
 
 ### Create firewall
+
 ```bash
  google compute firewall-rules create firewall-rules-gke --project=kubernetes-learning-433210 --network=projects/kubernetes-learning-433210/global/networks/kubernetes-network --description=Allow\ connection\ from\ specific\ IP --direction=INGRESS --priority=1000 --source-ranges=27.60.164.15/32 --action=ALLOW --rules=all
 ```
