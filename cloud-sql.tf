@@ -32,8 +32,37 @@ resource "google_sql_database_instance" "sql-instance" {
       private_network   = google_compute_network.custom-vpc-network.id
       enable_private_path_for_google_cloud_services = true
     }
+
+    backup_configuration {
+      enabled = true
+      start_time = var.backup-time
+      point_in_time_recovery_enabled = true
+    }
   }
   deletion_protection = false
+}
+
+resource "google_sql_database_instance" "sql-instnace-read-replica" {
+  name = "${var.sql_instance}-replica"
+  master_instance_name = google_sql_database_instance.sql-instance.name
+  region = var.project_region
+  database_version = var.database_version
+
+  settings {
+    tier              = var.machine_type
+    availability_type = var.availability_type
+    edition           = var.edition
+    user_labels       = {
+      environment = var.environment
+    }
+    ip_configuration {
+      ipv4_enabled      = true
+      private_network   = google_compute_network.custom-vpc-network.id
+      enable_private_path_for_google_cloud_services = true
+    }
+  }
+  deletion_protection = false
+
 }
 
 resource "google_sql_database" "postgresql-database" {
