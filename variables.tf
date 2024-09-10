@@ -83,3 +83,24 @@ variable "nat_gateway" {
     description = "Nat gateway name"
   
 }
+
+variable "auto_only" {
+  default = "AUTO_ONLY"
+  description = "nat_ip_allocate_option"
+}
+
+variable "list_of_subnetworks" {
+  default = "LIST_OF_SUBNETWORKS"
+  description = "List of subnetworks"
+  
+}
+
+variable "all_ip_ranges" {
+  default = ["ALL_IP_RANGES"]
+  description = "All IP ranges"
+}
+
+variable "nat_log_filter" {
+  default =  "ALL"
+  description = "NATs log filter"
+}
