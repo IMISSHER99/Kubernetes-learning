@@ -1,4 +1,4 @@
-project_id = "kubernetes-learning-433210"
+project_id = "architect-learning-435310"
 project_region = "asia-south1"
 route_mode = "REGIONAL"
 ip_address_range_frontend = "10.0.1.0/24"
