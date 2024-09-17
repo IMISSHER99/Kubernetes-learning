@@ -1,21 +1,18 @@
 variable "project_id" {}
 variable "project_region" {}
-variable "vpc_name" {}
 variable "route_mode" {}
-variable "subnet_name_frontend" {}
 variable "ip_address_range_frontend" {}
 variable "stack_type" {}
 variable "aggregate_interval" {}
 variable "include_all_metadata" {}
+variable "ip_address_range_backend" {}
+variable "ip_address_range_database" {}
 variable "allow-internal-traffic" {}
+
 variable "ingress" {
     default = "INGRESS"
     description = "Firewall Direction"
 }
-variable "ip_address_range_backend" {}
-variable "subnet_name_backend" {}
-variable "ip_address_range_database" {}
-variable "subnet_name_database" {}
 variable "allow_internal_traffic" {
   default = "allow-internal-traffic"
   description = "firewall name"
@@ -120,7 +117,7 @@ variable "sql_instance" {
 
 variable "database_version" {}
 variable "machine_type" {}
-variable "availability_type" {}
+variable "availability_type_regional" {}
 variable "edition" {}
 variable "environment" {}
 variable "postgresql-database" {
@@ -129,3 +126,42 @@ variable "postgresql-database" {
 }
 variable "db_username" {}
 variable "db_password" {}
+variable "backup-time" {}
+variable "availability_type_zonal" {}
+variable "update_track" {}
+variable "storage_bucket" {
+  default = "storage-bucker"
+  description = "Storage Bucket Name"
+}
+variable "access_prevention_policy" {}
+variable "change_storage_type" {
+  default = "SetStorageClass"
+  description = "Change Storage Class"
+}
+variable "nearline_storage_class" {
+  default = "NEARLINE"
+  description = "Storage Class Name"
+}
+
+variable "nearline_storage_age" {}
+variable "coldline_storage_class" {
+  default = "COLDLINE"
+  description = "Storage Class Name"
+}
+variable "coldline_storage_age" {}
+variable "archive_storage_class" {
+  default = "ARCHIVE"
+  description = "Storage Class Name"
+}
+
+variable "archive_storage_age" {}
+variable "delete" {
+  default = "Delete"
+  description = "Action Type"
+}
+variable "delete_age" {}
+variable "log_object_prefix" {
+  default = "logs-"
+  description = "Log Prefix"
+}
+variable "key_name" {}
