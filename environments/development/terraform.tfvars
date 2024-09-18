@@ -31,4 +31,4 @@ nearline_storage_age = 31
 coldline_storage_age = 62
 archive_storage_age = 94
 delete_age = 128
-key_name = "projects/kubernetes-learning-433210/locations/asia-south1/keyRings/custom-managed-key/cryptoKeys/custom-key"
+key_name = "projects/architect-learning-435310/locations/asia-south1/keyRings/custom-managed-key/cryptoKeys/custom-key"
