@@ -1,0 +1,39 @@
+name: INFRASTRUCTURE-PROVISIONING
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Infrastructure Setup'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: "architect-learning-service-acc@architect-learning-435310.iam.gserviceaccount.com"
+        #   https://iam.googleapis.com/projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github
+          workload_identity_provider: 'projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github'
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        working-directory: ./terraform
+        run: terraform plan -out=tfplan -detailed-exitcode
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve tfplan
