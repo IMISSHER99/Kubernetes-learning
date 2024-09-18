@@ -21,8 +21,9 @@ jobs:
       - name: Authenticate with GCP
         uses: google-github-actions/auth@v2
         with:
-          service_account: "dummy-524@capable-mind-428017-c2.iam.gserviceaccount.com"
-          workload_identity_provider: 'projects/929430503076/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github'
+          service_account: "architect-learning-service-acc@architect-learning-435310.iam.gserviceaccount.com"
+        #   https://iam.googleapis.com/projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github
+          workload_identity_provider: 'projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github'
       
       - name: Set Directory Based on Branch
         id: setdir
