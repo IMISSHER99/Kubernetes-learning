@@ -43,9 +43,9 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        working-directory: ./terraform
+        working-directory: ${{ env.DIR }}
         run: terraform plan -out=tfplan -detailed-exitcode
 
       - name: Terraform Apply
-        working-directory: ./terraform
+        working-directory: ${{ env.DIR }}
         run: terraform apply -auto-approve tfplan
