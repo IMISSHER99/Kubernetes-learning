@@ -24,9 +24,21 @@ jobs:
           service_account: "architect-learning-service-acc@architect-learning-435310.iam.gserviceaccount.com"
         #   https://iam.googleapis.com/projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github
           workload_identity_provider: 'projects/342909886583/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github'
-
+      
+      - name: Set Directory Based on Branch
+        id: setdir
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/production" ]]; then
+            echo "DIR=./environments/production" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/stage" ]]; then
+            echo "DIR=./environments/stage" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/test" ]]; then
+            echo "DIR=./environments/testing" >> $GITHUB_ENV
+          else
+            echo "DIR=./environments/development" >> $GITHUB_ENV
+          fi
       - name: Terraform Init
-        working-directory: ./terraform
+        working-directory: ${{ env.DIR }}
         run: terraform init
 
       - name: Terraform Plan
