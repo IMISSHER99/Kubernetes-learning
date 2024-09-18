@@ -39,9 +39,9 @@ jobs:
           fi
 
       - name: Terraform Init
-        working-directory: . ${{ env.DIR }}
+        working-directory: ${{ env.DIR }}
         run: terraform init
 
       - name: Terraform destroy
-        working-directory:  ${{ env.DIR }}
+        working-directory: ${{ env.DIR }}
         run: terraform destroy -auto-approve
