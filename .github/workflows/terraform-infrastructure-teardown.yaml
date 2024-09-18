@@ -1,0 +1,46 @@
+name: DELETE-INFRASTRUCTURE
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Destroy Infrastructure Setup'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: "dummy-524@capable-mind-428017-c2.iam.gserviceaccount.com"
+          workload_identity_provider: 'projects/929430503076/locations/global/workloadIdentityPools/github-infrastructure-action/providers/github'
+      
+      - name: Set Directory Based on Branch
+        id: setdir
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/production" ]]; then
+            echo "DIR=./environments/production" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/stage" ]]; then
+            echo "DIR=./environments/stage" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/test" ]]; then
+            echo "DIR=./environments/testing" >> $GITHUB_ENV
+          else
+            echo "DIR=./environments/development" >> $GITHUB_ENV
+          fi
+
+      - name: Terraform Init
+        working-directory: . ${{ env.DIR }}
+        run: terraform init
+
+      - name: Terraform destroy
+        working-directory:  ${{ env.DIR }}
+        run: terraform destroy -auto-approve
