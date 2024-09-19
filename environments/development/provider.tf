@@ -6,7 +6,7 @@ terraform {
         }
     }
     backend "gcs" {
-        bucket = "terraform-github-actions-bucket"
+        bucket = "terraform-state-actions-bucket"
         prefix = "terraform/state"
     }
 }

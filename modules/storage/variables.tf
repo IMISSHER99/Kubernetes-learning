@@ -9,7 +9,7 @@ variable "key_name" {}
 variable "environment" {}
 
 variable "storage_bucket" {
-  default = "storage-bucker"
+  default = "storage-bucket-architecture-learning"
   description = "Storage Bucket Name"
 }
 variable "change_storage_type" {
