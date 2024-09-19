@@ -2,9 +2,10 @@
 
 ## Version History
 
-| Version Number | Name            | Date       |
-|----------------|-----------------|------------|
-| 1.0            | Initial Design  | 2024-09-10 |
+| Version Number | Name               | Date       |
+|----------------|--------------------|------------|
+| 1.0            | Initial Design     | 2024-09-10 |
+| 1.1            | Added Flow Diagram | 2024-09-19 |
 
 ## Overview
 
