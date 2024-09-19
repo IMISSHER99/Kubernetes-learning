@@ -37,6 +37,6 @@ variable "artifact-registry-admin" {
     description = "Artifact Registry Admin"
 }
 variable "admin_user_email" {
-  default = "radiantimissher@gmail.com"
+  default = "user:radiantimissher@gmail.com"
   description = "Admin User Email"
 }
