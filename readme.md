@@ -10,6 +10,11 @@
 
 This repository contains the infrastructure setup and configuration for a scalable and secure e-commerce application on Google Cloud Platform (GCP) without using Kubernetes. The architecture leverages managed services such as Cloud Run, App Engine, Cloud SQL, and more to simplify operations and enhance scalability.
 
+## Architecture Diagram
+
+![ArchitectureDiagram](https://github.com/user-attachments/assets/fe33e46f-855d-4db5-9d8b-c2da52161e6f)
+
+
 ## Architecture Components
 
 1. **Networking Setup: Custom VPC**
