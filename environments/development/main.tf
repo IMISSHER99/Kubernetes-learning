@@ -1,3 +1,8 @@
+module "users" {
+    source = "../../modules/users"
+    project_id = var.project_id
+    project_region = var.project_region
+}
 module "vpc" {
     source                    = "../../modules/vpc"
     project_id                = var.project_id
