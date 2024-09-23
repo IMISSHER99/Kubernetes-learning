@@ -1,5 +1,7 @@
 module "vpc" {
     source                    = "../../modules/vpc"
+    service_network_peering_connection = module.database.service_network_peering_connection
+    global_ip_address = module.database.global_ip_address
     project_id                = var.project_id
     project_region            = var.project_region
     route_mode                = var.route_mode

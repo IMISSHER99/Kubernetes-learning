@@ -7,6 +7,8 @@ variable "aggregate_interval" {}
 variable "include_all_metadata" {}
 variable "ip_address_range_backend" {}
 variable "ip_address_range_database" {}
+variable "global_ip_address" {}
+variable "service_network_peering_connection" {}
 
 variable "vpc_name" {
     default = "custom-vpc"

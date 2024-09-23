@@ -6,6 +6,10 @@ resource "google_compute_network" "custom-vpc-network" {
   mtu                     = 1460
   routing_mode            = var.route_mode
   description = "Custom VPC for an ecommerce architecture"
+  depends_on = [ 
+    var.global_ip_address,
+    var.service_network_peering_connection
+   ]
 }
 
 # Creating a custom subnet
