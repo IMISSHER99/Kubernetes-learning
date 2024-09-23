@@ -90,3 +90,16 @@ resource "google_sql_user" "postgresql-user" {
     instance = google_sql_database_instance.sql-instance.name
     password = var.db_password_output
 }   
+
+resource "null_resource" "cleanup_sql" {
+  provisioner "local-exec" {
+    command = <<EOT
+      terraform destroy -target=google_sql_database_instance.sql-instance -target=google_sql_database_instance.sql-instance-read-replica -auto-approve
+    EOT
+  }
+
+  triggers = {
+    sql_instance_name = google_sql_database_instance.sql-instance.name
+    read_replica_name = google_sql_database_instance.sql-instance-read-replica.name
+  }
+}
