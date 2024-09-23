@@ -11,6 +11,9 @@ resource "google_service_networking_connection" "private-vpc-connection" {
     network = var.network_id
     service = var.service
     reserved_peering_ranges = [google_compute_global_address.private-ip-address.name]
+    lifecycle {
+      create_before_destroy = true
+    }
 }
 
 resource "google_sql_database_instance" "sql-instance" {
@@ -46,6 +49,9 @@ resource "google_sql_database_instance" "sql-instance" {
     }
   }
   deletion_protection = false
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "google_sql_database_instance" "sql-instance-read-replica" {
@@ -68,6 +74,9 @@ resource "google_sql_database_instance" "sql-instance-read-replica" {
     }
   }
   deletion_protection = false
+  lifecycle {
+    create_before_destroy = true
+  }
 
 }
 
