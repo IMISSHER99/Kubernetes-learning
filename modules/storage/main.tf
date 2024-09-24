@@ -66,7 +66,7 @@ resource "google_storage_bucket" "storage-bucket" {
       environment = var.environment
     }  
 
-    # encryption {
-    #   default_kms_key_name = var.key_name
-    # }
+    encryption {
+      default_kms_key_name = var.key_name
+    }
 }
