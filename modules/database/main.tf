@@ -21,8 +21,6 @@ resource "google_sql_database_instance" "sql-instance" {
   region = var.project_region
   database_version = var.database_version
 
-  depends_on = [ google_service_networking_connection.private-vpc-connection ]
-
   settings {
     tier              = var.machine_type
     availability_type = var.availability_type_regional
